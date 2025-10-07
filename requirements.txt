@@ -12,3 +12,5 @@ langchain-community
 langchain-groq
 langchain
 lightgbm
+keras
+tensorflow
