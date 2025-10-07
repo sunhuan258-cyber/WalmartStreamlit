@@ -464,13 +464,13 @@ def render_prophet_tab():
                     fig.update_layout(height=350, margin=dict(l=20, r=20, t=50, b=20), template="plotly_dark")
                     st.plotly_chart(fig, use_container_width=True)
 
-                    # --- SHAP 可解释性分析 (v2.1 - 深色主题) ---
+                    # --- SHAP 可解释性分析 (v2.2 - BytesIO 渲染修复) ---
                     st.subheader("🔍 模型决策解剖 (SHAP)")
                     with st.spinner("正在计算并绘制SHAP贡献图..."):
                         explainer = shap.TreeExplainer(model)
                         shap_values = explainer.shap_values(final_input_df)
                         
-                        # 为SHAP图应用自定义深色主题
+                        # 1. 设置样式并创建图
                         plt.style.use('dark_background')
                         plt.rcParams.update({
                             'figure.facecolor': '#1A1C24',
@@ -485,13 +485,19 @@ def render_prophet_tab():
 
                         fig_shap, ax_shap = plt.subplots(figsize=(10, 4), dpi=150)
                         shap.summary_plot(shap_values, final_input_df, plot_type="bar", show=False)
-                        # 手动设置条形颜色以匹配主题
                         for bar in ax_shap.patches:
                             bar.set_color('#64B5F6')
                         
-                        st.pyplot(fig_shap, bbox_inches='tight', facecolor=ax_shap.get_facecolor())
-                        plt.clf()
-                        plt.style.use('default') # 重置matplotlib样式以避免影响其他会话
+                        # 2. 将图保存到内存中的BytesIO缓冲区
+                        buf = BytesIO()
+                        fig_shap.savefig(buf, format="png", bbox_inches='tight', facecolor=ax_shap.get_facecolor())
+                        
+                        # 3. 使用st.image显示内存中的图片
+                        st.image(buf)
+                        
+                        # 4. 清理资源
+                        plt.close(fig_shap)
+                        plt.style.use('default')
                         
                         with st.expander("💡 如何解读SHAP贡献图？"):
                             st.markdown("""
