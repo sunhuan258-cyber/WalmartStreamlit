@@ -6,6 +6,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import joblib
 import shap
+import matplotlib
+matplotlib.use('Agg') # 修正matplotlib在服务器上的渲染问题
 import matplotlib.pyplot as plt
 from io import StringIO
 from sqlalchemy import create_engine
