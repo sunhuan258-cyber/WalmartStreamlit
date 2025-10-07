@@ -11,3 +11,4 @@ SQLAlchemy
 langchain-community
 langchain-groq
 langchain
+lightgbm
