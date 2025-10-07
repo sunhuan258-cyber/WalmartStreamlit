@@ -27,7 +27,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ================== 全局CSS美化 (v2.2 - 动态交互版) ==================
+# ================== 全局CSS美化 (v2.3 - 移动端适配) ==================
 st.markdown("""
 <style>
 /* General Body and Font */
@@ -101,6 +101,22 @@ div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] > div[data
 div[data-testid="stVerticalBlock"] > div[data-testid="stContainer"]:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 24px 0 rgba(0,0,0,0.4), 0 0 20px rgba(100, 181, 246, 0.4);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    /* Force streamlit columns to stack vertically on mobile */
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: column;
+    }
+    [data-testid="stHorizontalBlock"] > div {
+        width: 100% !important;
+        margin-bottom: 1rem; /* Add space between stacked columns */
+    }
 }
 
 </style>
