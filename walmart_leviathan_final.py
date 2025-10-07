@@ -518,7 +518,7 @@ elif tab == "神谕 (自然语言查询)":
     @st.cache_resource
     def get_llm():
         """智能LLM连接器，优先云端，备用本地。"""
-        model_name = "llama3-8b-8192"
+        model_name = "mixtral-8x7b-32768" # 更新为现役模型
         # 优先尝试连接Groq云端模型
         try:
             if 'GROQ_API_KEY' in st.secrets:
