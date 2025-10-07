@@ -9,6 +9,7 @@ import shap
 import matplotlib
 matplotlib.use('Agg') # 修正matplotlib在服务器上的渲染问题
 import matplotlib.pyplot as plt
+from io import BytesIO
 from io import StringIO
 from sqlalchemy import create_engine
 from langchain_community.utilities import SQLDatabase
