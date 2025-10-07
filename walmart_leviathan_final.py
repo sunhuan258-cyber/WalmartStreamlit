@@ -14,13 +14,10 @@ from langchain_community.chat_models import ChatOllama
 from langchain_groq import ChatGroq
 from langchain.chains import create_sql_query_chain
 
-# ================== 文件路径定义 (v2.0 - 动态路径版) ==================
-# 使用os.path.dirname(__file__)来动态获取当前脚本所在的目录，解决硬编码问题
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
-# 数据库路径现在也基于动态的应用目录，假定walmart.db与脚本在同一文件夹下
-DB_PATH = os.path.join(APP_DIR, "walmart.db")
-# 模型文件路径现在基于动态的应用目录
-MODEL_PATH = os.path.join(APP_DIR, "walmart_model_artifacts.joblib")
+# ================== 文件路径定义 (v2.3 - 适配云端部署) ==================
+# 适配Streamlit云端部署，路径为相对于仓库根目录
+DB_PATH = "walmart.db"
+MODEL_PATH = "walmart_model_artifacts.joblib"
 
 # ================== 页面基础配置 ==================
 st.set_page_config(
