@@ -1,6 +1,7 @@
 streamlit
 pandas
 duckdb
+duckdb-engine
 plotly
 joblib
 scikit-learn
